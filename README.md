@@ -1,6 +1,5 @@
 # TREES workshop 2019
 -------------
-Documents used for the TREES workshop held at University of Wyoming in September 2019
 
 This repository contains documents used for a workshop held at the University of Wyoming in September 2019 on the biophysical process-based model, **Terrestrial Regional Ecosystem Exchange Simulator (TREES)**. 
 
