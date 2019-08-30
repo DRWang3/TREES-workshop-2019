@@ -1,0 +1,12 @@
+drivers/sumo_pinon_drought_march_to_august_2012.txt
+1
+pinus_edulis.p
+pine_mod
+outputs/sumo_pine_drought
+200000
+covfile1
+0.2
+0.25
+30
+1000
+0
