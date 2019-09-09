@@ -315,14 +315,14 @@ void BiogeochemicalCycles::allocatePools()
     	assert(SLA_avg != NULL);
     	Projected_LeafArea_total = new double;
     	assert(Projected_LeafArea_total != NULL);
-    
+
         Karray = new double[500];
         assert(Karray != NULL);
         Narray = new double[500];
         assert(Narray != NULL);
         rarray = new double[500];
         assert(rarray != NULL);
-    
+
     	SingleLeafBiomassCarbon = new double[500];
     	assert(SingleLeafBiomassCarbon != NULL);
     	SingleLeafBiomassNitrogen = new double[500];
@@ -602,14 +602,14 @@ cout << endl;
 
         	Lf_idx[0] =0;
         	phyllo_tracker[0] =0.0;
-            
+
         	for (int j = 0; j < 500; j++)
         	{
                     //arrays that hold leaf growth parameters
                     Karray[j] = treesParams.leafAreaMax;
                     Narray[j] = treesParams.initialLeafSize;
                     rarray[j] = treesParams.leafArea_Rate;
-                
+
                     //single leaf arrays
             		SingleLeafBiomassCarbon[j] = 0.0;
             		SingleLeafBiomassNitrogen[j] =0.0;
@@ -1105,8 +1105,8 @@ void BiogeochemicalCycles::clearPools()
 //     August 2017 DSM - Modification to allow noctural stomatal conductance
 //
 double BiogeochemicalCycles::photosynthesis(trees_params treesParams,
-						double Jmax_mult, 
-						double thetaJ, 
+						double Jmax_mult,
+						double thetaJ,
 						double phiJ,
                                                 struct farqin in,
 						struct farqout& out)
@@ -1452,7 +1452,7 @@ double BiogeochemicalCycles::computeRootArea(trees_params treesParams,
 	rootCarbon = fineRootBiomassCarbon[j][k] + coarseRootBiomassCarbon[j][k];
 
 //convert kgC ha-1 to kgC m-2
-//m2 root area m-2 ground area = 
+//m2 root area m-2 ground area =
 //      kgC root m-2 ground area * m-2 ground area * m2 root m-2 ground area kgC-1 root
 //
 	rootArea[j][k] = 0.001;
@@ -1460,7 +1460,7 @@ double BiogeochemicalCycles::computeRootArea(trees_params treesParams,
 	{
 		rootArea[j][k] = 0.0001 * rootCarbon * SRA;
 	}
-	
+
         totalRootArea = rootArea[j][k];
 
 	return(totalRootArea);
@@ -1528,7 +1528,7 @@ double BiogeochemicalCycles::computeFineRootArea(trees_params treesParams,
 	rootCarbon = fineRootBiomassCarbon[j][k] + coarseRootBiomassCarbon[j][k];
 
 //convert kgC ha-1 to kgC m-2
-//m2 root area m-2 ground area = 
+//m2 root area m-2 ground area =
 //      kgC root m-2 ground area * m-2 ground area * m2 root m-2 ground area kgC-1 root
 //
 	rootArea[j][k] = 0.0001 * rootCarbon * SRA; //m2 root m2 ground area
@@ -1605,7 +1605,7 @@ double BiogeochemicalCycles::computeCanopyCover(trees_params treesParams)
 	double totalRootAxialLength, rootAxialLength, maximumLateralLength;
 	double crownRadius, crownArea, groundArea, canopy_cover;
 
-//Define ground area using longest lateral root length (defined in param_mod)	
+//Define ground area using longest lateral root length (defined in param_mod)
 	totalRootAxialLength = 0.0;
 	for (int j = 0; j < nRoots; ++j)
 	{
@@ -1678,7 +1678,7 @@ void BiogeochemicalCycles::computeLateralRootWeibulls(trees_params& treesParams)
         treesParams.lat_Root_b_value = bsum;
         treesParams.lat_Root_c_value = csum;
 }
-void BiogeochemicalCycles::computeLateralRootWeibulls(int j, 
+void BiogeochemicalCycles::computeLateralRootWeibulls(int j,
 							trees_params treesParams,
 							double& bsum,
 							double& csum)
@@ -1748,7 +1748,7 @@ void BiogeochemicalCycles::computeLateralRootWeibulls(int j,
 		cfactor *= 0.95;
         }
 }
-void BiogeochemicalCycles::updateLateralRootWeibulls(double bsat[][MD], 
+void BiogeochemicalCycles::updateLateralRootWeibulls(double bsat[][MD],
 							double ccsat[][MD],
 							trees_params treesParams)
 {
@@ -1794,7 +1794,7 @@ double BiogeochemicalCycles::getRootCarbon(int j)
 	}
 	return (rootCarbon);
 }
-double BiogeochemicalCycles::getRootCarbon(int j, 
+double BiogeochemicalCycles::getRootCarbon(int j,
 					   int k)
 {
 	double rootCarbon;
@@ -2323,7 +2323,7 @@ double BiogeochemicalCycles::getRhizosphereDeadMicrobialCarbon()
         double Cm = 0.0;
 
         for (int j = 0; j < nRoots; j++)
-        {                                   
+        {
                 Cm += getRhizosphereDeadMicrobialCarbon(j);
         }
         return(Cm);
@@ -2480,7 +2480,7 @@ double BiogeochemicalCycles::getRhizosphereNitrateNitrogen(int j,
 //  and relative hydraulic conductance (kratio)
 //
 //Assumes phloem loading has already taken place and energy costs consumed
-//  -- these costs are taken where net photosynthesis is added to the PSN state variable in 
+//  -- these costs are taken where net photosynthesis is added to the PSN state variable in
 //     simulation_function()
 //
 //Other assumptions: 0.16 diffusion term assumes that it would take 6 simulation time
@@ -2491,7 +2491,7 @@ void BiogeochemicalCycles::computeNSCfluxes(trees_params treesParams,
 					    double kratio,
 				       	    double* kratio_vector)
 {
-	double C, flux, leafCfract, stemCfract, rootCfract; 
+	double C, flux, leafCfract, stemCfract, rootCfract;
 	double rootCarbon, singleRootC, kratioRoot;
 	double cfract;
 //flux between canopy and stem
@@ -2575,7 +2575,7 @@ void BiogeochemicalCycles::computeNfluxes(trees_params treesParams,
 					  double kratio,
 					  double* kratio_vector)
 {
-	double C, nfract, nscalar, flux, leafNfract, rootNfract; 
+	double C, nfract, nscalar, flux, leafNfract, rootNfract;
 	double rootNitrogen, leafNstore, singleRootN, kratioRoot;
 
 	leafNstore = leafStoredNitrogen[0];
@@ -2696,7 +2696,7 @@ void BiogeochemicalCycles::computeRootExudates(trees_params treesParams,
 
 //amino acid production is limited first by residualN, then by residual NSC
 //assumes that 20% C is a cost to produce the amino acid
-//flux is dimensionless, accounts for normalized concentration differences 
+//flux is dimensionless, accounts for normalized concentration differences
 //  between root NSC and exudates, and relative hydraulic conductance
 	rootC = getRootCarbon(j, k);
 	rootNSCconc = nsc/(nsc+rootC+0.0000001);
@@ -2721,7 +2721,7 @@ void BiogeochemicalCycles::computeRootExudates(trees_params treesParams,
 		}
 		aminoAcidN = aminoAcidC / CN;
 		heterotrophicRespiration[j] += aminoAcidC * 0.2;
-	} 
+	}
 	else
 	{
 		aminoAcidC = 0.0;
@@ -2762,7 +2762,7 @@ void BiogeochemicalCycles::computeRootExudates(trees_params treesParams,
 //computeLeafAllocation()
 //Update growth and leaf area and root-to-leaf area ratio if not in dormancy (root T < 5 C)
 //What to do about LAI - need to modify lai and Al; lai_at_sat_kl is used only once per simulation
-//Currently assumes allocation to new leaf growth is up to 45% of growth respiration, 
+//Currently assumes allocation to new leaf growth is up to 45% of growth respiration,
 //    and leaf longevity is an input
 //Assuming leaf biomass can be approximated by 86% (carbon in cellulose) of NSC use
 //This computes potential lai at saturated kl, with actual determined by phenology
@@ -2883,7 +2883,7 @@ void BiogeochemicalCycles::updateLeafCarbonNitrogenPools(trees_params& treesPara
 
 //set leaf carbon minimum for the leaf bud to equivalent of 0.1 m2 m-2 * input parameter LAI
 	minLeafC = 0.1*baseLAI/treesParams.SLA*10000.0;
-		
+
 //when leaves are expanding
 //growth respiration is costs are taken from chloroplast sugar and/or starch
 //when chloroplast sugar and starch are limiting expansion respiration is
@@ -2929,7 +2929,7 @@ void BiogeochemicalCycles::updateLeafCarbonNitrogenPools(trees_params& treesPara
 			delta_nsc += (minLeafC-leafBiomassCarbon[0]);
 			leafBiomassCarbon[0] = minLeafC;
 		}
-//0.5 denotes 50% retranslocation 
+//0.5 denotes 50% retranslocation
 //apportioned to leaf bud and reserves
 		leafBiomassNitrogen[0] += 0.5*delta_nsc/CN;
 		leafBiomassNitrogen[0] += 0.25/baseLAI*delta_nsc/CN;
@@ -2938,7 +2938,7 @@ void BiogeochemicalCycles::updateLeafCarbonNitrogenPools(trees_params& treesPara
 		leafResidueNitrogen[0] -= 0.5*delta_nsc/CN;
 	}
 }
-	
+
 //
 //computeLeafNdemand()
 //determine how much nitrogen is needed to support leaf growth of delta_lai
@@ -2954,7 +2954,7 @@ void BiogeochemicalCycles::computeLeafNdemand(trees_params treesParams,
 {
 /*
 	double leafCN, total_N_demand, residual_N_demand, NfromStorage;
-	
+
 	double N_avail_rate_plant = plantNstatus[0];
 
 //this function adjusts the leaf C/N ratio as a function of available N
@@ -3007,7 +3007,7 @@ void BiogeochemicalCycles::updateStemCarbonNitrogenPools(trees_params treesParam
 	liveStemIncrement = tgrowth*liveStemCarbon[0]/(5.0*lifeSpan);
 	liveStemCarbon[0] -= liveStemIncrement;
 	liveStemNitrogen[0] -= liveStemIncrement/CN;
-	
+
 //Dead stem wood
 	deadStemIncrement = liveStemIncrement;
 	deadStemCarbon[0] += deadStemIncrement;
@@ -3073,7 +3073,7 @@ void BiogeochemicalCycles::updateStemCarbonNitrogenPools(trees_params treesParam
 		liveStemNitrogen[0] = liveStemCarbon[0]/CN;
 	}
 	if (rgrowth > 0.0)
-        {       
+        {
                 stemAllocation = stemCincrement/rgrowth;
         }
 	else
@@ -3232,7 +3232,7 @@ exit(1);
 			N_neg_demand += 0.86*N_neg_fract*rootCincrement/CN;
 			N_pos_demand += 0.86*(1.0-N_neg_fract)*rootCincrement/CN;
 //increase root lifespan at sqrt(2) with each diameter doubling
-                        rootLifeSpan *= treesParams.rootDiamMultiplier; 
+                        rootLifeSpan *= treesParams.rootDiamMultiplier;
                         fineRootLow -= 0.02;
                         fineRootHigh *= 0.5;
 			rootScalar *= 1.25;
@@ -3295,7 +3295,7 @@ exit(1);
 			N_neg_demand += 0.86*N_neg_fract*rootCincrement/CN;
 			N_pos_demand += 0.86*(1.0-N_neg_fract)*rootCincrement/CN;
 //roots double in lifespan with diameter doubling
-                        rootLifeSpan *= treesParams.rootDiamMultiplier; 
+                        rootLifeSpan *= treesParams.rootDiamMultiplier;
                         fineRootLow -= 0.02;
                         fineRootHigh *= 0.5;
                 }
@@ -3591,7 +3591,7 @@ void BiogeochemicalCycles::computeRootNitrogenUptake(double UP_neg[][10],
 //try a sigmoid function
 	passiveNitrogenDemand = 1.0+ 9.0/(1.0+exp(10.0*plantNstatus[0]-5.0));
 	//passiveNitrogenDemand = 1.0;
-	
+
 
 //S.A. Barber, 1995. Soil Nutrient Bioavailability: A mechanistic approach. i
 //   John Wiley & Sons, New York
@@ -3631,7 +3631,7 @@ void BiogeochemicalCycles::computeRootNitrogenUptake(double UP_neg[][10],
 //For all rhizosphere zones
 		rootRadius = 0.5 * treesParams.minRootDiam;
 //assume 100% of finest root can absorb N, 50% of second finest, etc
-		absorbFract = 1.0; 
+		absorbFract = 1.0;
 		for (int k = 0; k < nRootOrders; k++)
 		{
 			rootFract = absorbFract*rootArea[j][k]/totRoot;
@@ -3719,7 +3719,7 @@ void BiogeochemicalCycles::computeRootNitrogenUptake(double UP_neg[][10],
 
 //active N uptake is limited by available NSC in the root
 //cout << "UPa = " << UPa << endl;
-			if (CostUP > 0.95*rootNSC[j][k] && CostUP > 0.0) 
+			if (CostUP > 0.95*rootNSC[j][k] && CostUP > 0.0)
 			{
 				UPa *= rootNSC[j][k]/CostUP;
 				CostUP = 0.95*rootNSC[j][k];
@@ -3758,7 +3758,7 @@ void BiogeochemicalCycles::computeRootNitrogenUptake(double UP_neg[][10],
 
 //move active N uptake to root and leaf in equal proportions
 //convert from g m-3 to kg ha-1
-			rootMineralNitrogen[j][k] += UPa*10.0; 
+			rootMineralNitrogen[j][k] += UPa*10.0;
 
 //
 //AMMONIUM NITROGEN
@@ -3806,7 +3806,7 @@ void BiogeochemicalCycles::computeRootNitrogenUptake(double UP_neg[][10],
 			CostUP = 0.17*UPa*10.0;
 
 //active N uptake is limited by available NSC in the root
-			if (CostUP > 0.95*rootNSC[j][k] && CostUP > 0.0) 
+			if (CostUP > 0.95*rootNSC[j][k] && CostUP > 0.0)
 			{
 				UPa *= 0.95*rootNSC[j][k]/CostUP;
 				CostUP = 0.95*rootNSC[j][k];
@@ -3820,7 +3820,7 @@ void BiogeochemicalCycles::computeRootNitrogenUptake(double UP_neg[][10],
 			UP_pos[j][k] += UPa/rhizVolume;
 //move active N uptake to root
 //convert from g m-3 to kg ha-1
-			rootMineralNitrogen[j][k] += UPa*10.0; 
+			rootMineralNitrogen[j][k] += UPa*10.0;
 			if (UP_neg[j][k] < 0.0)
 			{
 				UP_neg[j][k] = 0.0;
@@ -4084,7 +4084,7 @@ void BiogeochemicalCycles::updateRhizospherePools(trees_params treesParams,
 //cout << cumDist << endl;
 		if (treesParams.usePhenology == true) //perennial plants
 		{
-			AtoVbulk = 0.1 / depth * bulkDensity / max(treesParams.ar[j+3], 1.0 - cumDist); 
+			AtoVbulk = 0.1 / depth * bulkDensity / max(treesParams.ar[j+3], 1.0 - cumDist);
 		}
 		else //annual plants
 		{
@@ -4125,7 +4125,7 @@ void BiogeochemicalCycles::updateRhizospherePools(trees_params treesParams,
 			{
 				if (treesParams.usePhenology == true) //perennial plants
 				{
-//add leaf residue 
+//add leaf residue
 					dC = 0.1/48.0*leafResidueCarbon[0]/(730.0/(fns+0.0001))*rhizVolume/depth;
 					dN = dC * leafResidueNitrogen[0]/leafResidueCarbon[0];
 					leafResidueCarbon[0] -= dC;
@@ -4152,7 +4152,7 @@ void BiogeochemicalCycles::updateRhizospherePools(trees_params treesParams,
 				ADD += dC;
 				CNadd = ADD/(dN + dN2 + dN3);
 //convert from kg ha-1 to g m-3 rhizosphere volume
-				ADD *= AtoV; 
+				ADD *= AtoV;
 
 			}
 			else //incorporate only root residue
@@ -4208,8 +4208,8 @@ void BiogeochemicalCycles::updateRhizospherePools(trees_params treesParams,
 //compute decomposition, mineralization-immobilization, and nitrification
 //phi is the coefficient of nitrogen sufficiency for bacteria use (Eq. 23 in Porporato 2003 AWR
 //
-			phi = computeMineralizationImmobilization(MIN, PHI, IMM_pos, IMM_neg, 
-							DECl, DECh, DECea, DECes, rh, rr, kd, kn, fns, j, k, 
+			phi = computeMineralizationImmobilization(MIN, PHI, IMM_pos, IMM_neg,
+							DECl, DECh, DECea, DECes, rh, rr, kd, kn, fns, j, k,
 							t_soil, theta, AtoV, AtoVbulk, depth, treesParams);
 //amount of dead microbial biomass
 //a linear function assumes no change in rate of predation/competition as the population gets crowded
@@ -4243,7 +4243,7 @@ void BiogeochemicalCycles::updateRhizospherePools(trees_params treesParams,
 //PHI = MIN - (IMM_pos + IMM_neg);
 //does not include rr because that is a carbon pathway only
 			dNbdt = (1.0 - rh*CNl/CNh)*(DECl/CNl)+
-					(DECea/CNea) + 
+					(DECea/CNea) +
 					DECh/CNh - BD/CNb - PHI;
 			rhizosphereMicrobialNitrogen[j][k] += dNbdt/AtoV; //convert to kg ha-1
 
@@ -4293,7 +4293,7 @@ void BiogeochemicalCycles::updateRhizospherePools(trees_params treesParams,
 
 //Note: CO2 release will be added here as rr * (DECl + DECh + DECea + DECes)
 			sumRespiration += rr * (DECl + DECh + DECea + DECes) / AtoV;
-			
+
 		}
 		heterotrophicRespiration[j] += sumRespiration;
 	}
@@ -4317,10 +4317,10 @@ double BiogeochemicalCycles::computeMineralizationImmobilization(double& MIN,
 						   double& DECh,
 						   double& DECea,
 						   double& DECes,
-						   double& rh, 
-						   double& rr, 
-						   double& kd, 
-						   double& kn, 
+						   double& rh,
+						   double& rr,
+						   double& kd,
+						   double& kn,
 						   double& fns,
 						   int root_num,
 						   int root_order,
@@ -4351,7 +4351,7 @@ double BiogeochemicalCycles::computeMineralizationImmobilization(double& MIN,
 	kl *= 0.02083333; //m3 30-min-1 gC-1
 	kh *= 0.02083333; //m3 30-min-1 gN-1
 	ki_pos = ki_neg = 1.0 * 0.02083333; //m3 30min-1 gC-1
-	
+
 	assert(root_num >= 0);
 	assert(root_num < nRoots);
 	assert(root_order >= 0);
@@ -4416,7 +4416,7 @@ double BiogeochemicalCycles::computeMineralizationImmobilization(double& MIN,
 
 //kl and kh are rates - see soil respiration rate equations
 //rr (0 <= rr <= 1-rh is fraction of organic carbon that goes into CO2 production
-//rr varies typically from 0.6 to 0.8, increases with labile carbon 
+//rr varies typically from 0.6 to 0.8, increases with labile carbon
 //rh is the isohumic coefficient in range 0.15 to 0.35 depending on plant residues
 //assume rh increases with the litter C/N ratio
 
@@ -4431,7 +4431,7 @@ double BiogeochemicalCycles::computeMineralizationImmobilization(double& MIN,
 	{
 		rh = 0.35;
 	}
-	rr = 0.7 - 0.10 * rhizosphereLabileCarbon[root_num][root_order]*AtoV / 
+	rr = 0.7 - 0.10 * rhizosphereLabileCarbon[root_num][root_order]*AtoV /
 				(rhizosphereLabileCarbon[root_num][root_order]*AtoV + Cl);
 */
 	//rr = 0.6 + 0.2 * (kea*Cea+kes*Ces)/(kes*Cea+kes*Ces+kl*Cl);
@@ -4444,7 +4444,7 @@ double BiogeochemicalCycles::computeMineralizationImmobilization(double& MIN,
 	phi_num = ki_pos*N_pos + ki_neg*N_neg;
 //	phi_den = kh*Ch*(1.0/CNh - (1.0-rr)/CNb) + kl*Cl*(1.0/CNl - rh/CNh - (1.0-rh-rr)/CNb);
 //Eq. 23 modified to include amino acid and sugar exudates
-	phi_den = kh*Ch*(1.0/CNh - (1.0-rr)/CNb) + 
+	phi_den = kh*Ch*(1.0/CNh - (1.0-rr)/CNb) +
 			kl*Cl*(1.0/CNl - rh/CNh - (1.0-rh-rr)/CNb) +
 			kea*Cea*(1.0/CNea - (1.0-rr)/CNb) +
 			kes*Ces*(0.0 - (1.0-rr)/CNb);
@@ -4463,7 +4463,7 @@ double BiogeochemicalCycles::computeMineralizationImmobilization(double& MIN,
 //In Porporato et al 2003, fds (decomp rate) depends on soil water content
 //This is modified here to incorporate the role of temperature as well
 //  and this computation is accomplished by using the DAMM (Davidson et al GCB) model
-	fds_opt = DAMM_Cflux(treesParams, treesParams.optimal_soil_T, treesParams.theta_opt, 
+	fds_opt = DAMM_Cflux(treesParams, treesParams.optimal_soil_T, treesParams.theta_opt,
 								treesParams.porosity, depth, Cl);
 	if (fds_opt > 0.0)
 	{
@@ -4506,7 +4506,7 @@ double BiogeochemicalCycles::computeMineralizationImmobilization(double& MIN,
 //PHI = DECh*(1.0/CNh - (1.0-rr)/CNb) + DECl*(1.0/CNl - rh/CNh - (1.0-rh-rr)/CNb);
 //	PHI = phi*fds*Cb*(kh*Ch*(1.0/CNh - (1.0-rr)/CNb) + kl*Cl*(1.0/CNl - rh/CNh - (1.0-rh-rr)/CNb));
 //Eq. 18 modified to include amino acid and sugar exudates
-	PHI = phi*fds*Cb*(kh*Ch*(1.0/CNh - (1.0-rr)/CNb) + 
+	PHI = phi*fds*Cb*(kh*Ch*(1.0/CNh - (1.0-rr)/CNb) +
 			kl*Cl*(1.0/CNl - rh/CNh - (1.0-rh-rr)/CNb) +
 			kea*Cea*(1.0/CNea - (1.0-rr)/CNb) +
 			kes*Ces*(0.0 - (1.0-rr)/CNb));
@@ -4722,7 +4722,7 @@ double BiogeochemicalCycles::getSingleLeafThermTm(int k)
 
 // put leaf area potential of single leaf for first time step
 
-void BiogeochemicalCycles::putSingleLeafAreaPotential(double area_pot, 
+void BiogeochemicalCycles::putSingleLeafAreaPotential(double area_pot,
 						      int idx)
 {
     	SingleLeafAreaPotential[idx] = area_pot;
@@ -4787,21 +4787,21 @@ vector<double> BiogeochemicalCycles::getQuantileVals(double alpha, double beta, 
     double max_num;
     double min_num;
     double theta = 1/beta;
-    
+
     //first estimate quantile values
     double sample_vec[10000] = {0};
     const int samples = 10000;  // number of samples
-    
+
     default_random_engine generator;
     gamma_distribution<double> distribution(alpha, theta);
-    
+
     for (int i=0; i< samples; ++i) {
         sample_vec[i] = distribution(generator);
     }
-    
+
     // sort the array and get the quantile vals
-    sort(sample_vec, sample_vec + samples);
-    
+    std::sort(sample_vec, sample_vec + samples);
+
     int min_idx = (int) (min_quant*10000);
     int max_idx = (int) (max_quant*10000);
     min_num = sample_vec[min_idx];
@@ -4817,24 +4817,24 @@ double BiogeochemicalCycles::sampleTruncatedGamma(double alpha, double beta, dou
 {
     double sampledval;
     double theta = 1/beta;
-    
+
     gamma_distribution<double> distribution(alpha, theta);
     random_device rd;
     default_random_engine generator(rd());
-    
+
     double number = distribution(generator);
     while (number > maxlim || number < minlim)
     {
         number = distribution(generator);
     }
     sampledval = number;
-    
+
     return(sampledval);
 }
 
 
 
-double BiogeochemicalCycles::calcRAR(double thermCD, 
+double BiogeochemicalCycles::calcRAR(double thermCD,
 				     trees_params& treesParams, double* Karray, double* Narray, double* rarray, int idx)
 {
     	double A, f_prime, f;
@@ -4842,7 +4842,7 @@ double BiogeochemicalCycles::calcRAR(double thermCD,
         double K = Karray[idx];
         double N = Narray[idx];
         double r = rarray[idx];
-    
+
     	A = (K - N) / N;
     	denom = pow(1.0 + A * exp(-r * thermCD), 2.0);
     	f_prime = (K * A * r * exp(-r * thermCD))/denom;
@@ -4856,7 +4856,7 @@ double BiogeochemicalCycles::calcRAR(double thermCD,
 // this phase represents the realization of potential area, which is established during the cell division phase
 // this phase is the expansion phase, when individual cell size increases
 
-double BiogeochemicalCycles::calcRER(double thermEXP, 
+double BiogeochemicalCycles::calcRER(double thermEXP,
 				     trees_params& treesParams, double* Karray, double* Narray, double* rarray, int idx)
 {
     	double A, f_prime, f;
@@ -4864,12 +4864,12 @@ double BiogeochemicalCycles::calcRER(double thermEXP,
         double K = Karray[idx];
         double N = Narray[idx];
         double r = rarray[idx];
-    
+
         A = (K - N) / N;
         denom = pow(1.0 + A * exp(-r * thermEXP), 2.0);
         f_prime = (K * A * r * exp(-r * thermEXP))/denom;
         f = K/(1.0 + ((K - N) / N) * exp(-r * thermEXP));
-    
+
         return(f_prime/f);
 }
 
@@ -4880,7 +4880,7 @@ double BiogeochemicalCycles::calcRER(double thermEXP,
 // linked to pseudo delta C based on change in potential area formation
 // returns value in units of grams C substrate
 // Cannell and Thornley 2000
-double BiogeochemicalCycles::calcRespCD(double deltaAPot, 
+double BiogeochemicalCycles::calcRespCD(double deltaAPot,
 					double pseudoC_coef)
 {
     	return(1.33*pseudoC_coef*deltaAPot); // add explanation
@@ -4900,8 +4900,8 @@ double BiogeochemicalCycles::calcRespEXP(double deltaC)
 // calculate SLA at this ts for a specific leaf increase
 // SLA is in units m2/kg
 
-double BiogeochemicalCycles::calcSLA(double plantNitrogenStatus, 
-				     double SLA_max, 
+double BiogeochemicalCycles::calcSLA(double plantNitrogenStatus,
+				     double SLA_max,
 				     double SLA_min)
 {
 // plantNstatus is from 0 to 1; 1 = happy
@@ -4920,7 +4920,7 @@ double BiogeochemicalCycles::calcSLA(double plantNitrogenStatus,
 // SLA in m2/kg
 // returns kg C
 
-double BiogeochemicalCycles::calcdeltaC(double SLA, 
+double BiogeochemicalCycles::calcdeltaC(double SLA,
 					double deltaAreaL)
 {
     	double convertedArea;
@@ -4935,7 +4935,7 @@ double BiogeochemicalCycles::calcdeltaC(double SLA,
 // units: kgN
 // 1 hectare = 1*10^8 cm2
 
-double BiogeochemicalCycles::calcdeltaN(double deltaC, 
+double BiogeochemicalCycles::calcdeltaN(double deltaC,
 					trees_params treesParams)
 {
     	double leafCN, SLA_instant, deltaN;
@@ -4977,34 +4977,34 @@ double BiogeochemicalCycles::calcNRAR(double NStatus)
 // expansion phase of leaf growth
 double BiogeochemicalCycles::calcHydRER(double waterStat)
 {
-    
+
     double lim1, lim2;
     double coef;
-    
+
     lim1 = 0.65;
     lim2 = 0.85;
-    
+
     if(waterStat > lim2)
     {
         coef = 1.0;
     }
-    
+
     if(waterStat <= lim2 && waterStat >= lim1)
     {
         coef = waterStat/(lim2-lim1) + lim1/(lim1-lim2);
     }
-    
+
     if(waterStat < lim1)
     {
         coef = 0.0;
     }
-    
+
     return(coef); // k_p_e.latK[1]/ksat[1][1];
 }
 
 // compute effect of NSC status on
 // expansion phase of leaf growth
-double BiogeochemicalCycles::calcNSCRER(double NSCStatus, 
+double BiogeochemicalCycles::calcNSCRER(double NSCStatus,
 					double deltaC)
 { // deltaC = C_needed (kgC/ha)
     	double adjustment, threshold;
@@ -5014,7 +5014,7 @@ double BiogeochemicalCycles::calcNSCRER(double NSCStatus,
     	if(NSCStatus >= threshold)
     	{
         	adjustment = 1.0;
-    	} 
+    	}
 	else
     	{
         	adjustment = NSCStatus/threshold;
@@ -5027,10 +5027,10 @@ double BiogeochemicalCycles::calcNSCRER(double NSCStatus,
 // main function to update growth for a single leaf
 //
 
-void BiogeochemicalCycles::updateLeaf(int k, 
-				      double delta_thermTime, 
-				      trees_params& treesParams, 
-				      double ProjGrndArea_instant, 
+void BiogeochemicalCycles::updateLeaf(int k,
+				      double delta_thermTime,
+				      trees_params& treesParams,
+				      double ProjGrndArea_instant,
 				      double RL,
 				      double N_neg_fract,
                                       double& N_neg_demand,
@@ -5046,7 +5046,7 @@ void BiogeochemicalCycles::updateLeaf(int k,
     	double delta_nsc = 0.0; // respiration growth cost, kg/ha
     	double NfromStorage = 0.0; // N cost, kg/ha
         double waterStat = 1.0;
-    
+
     double K = Karray[idx];
     double N = Narray[idx];
     double r = rarray[idx];
@@ -5056,19 +5056,19 @@ void BiogeochemicalCycles::updateLeaf(int k,
     	SingleLeafThermTm[k] += delta_thermTime;
 
 // if leaf is still developing
-    	if ((SingleLeafThermTm[k] < duration_Leaf ) && 
+    	if ((SingleLeafThermTm[k] < duration_Leaf ) &&
 			((SingleLeafArea[k] < SingleLeafAreaPotential[k] ) ) )
     	{
 
 // --------------------
 // in cell division(CD)
 // --------------------
-        	if ((SingleLeafThermTm[k] <= treesParams.proportion_CD * duration_Leaf) && 
+        	if ((SingleLeafThermTm[k] <= treesParams.proportion_CD * duration_Leaf) &&
 				(SingleLeafArea[k] <= K ) )
         	{
 
 // amt of thermal time in cell division
-            		thermCD = SingleLeafThermTm[k]; 
+            		thermCD = SingleLeafThermTm[k];
 // theoretical optimal RAR
             		RAR = calcRAR(thermCD, treesParams, Karray, Narray, rarray, idx);
 
@@ -5081,7 +5081,7 @@ void BiogeochemicalCycles::updateLeaf(int k,
             		if ((SingleLeafAreaPotential[k] + deltaApot) > K)
 
 // if the change will bring total greater than max
-            		{ 
+            		{
                 		deltaApot =  K - SingleLeafAreaPotential[k];
             		}
             		SingleLeafAreaPotential[k]  += deltaApot;
@@ -5101,7 +5101,7 @@ void BiogeochemicalCycles::updateLeaf(int k,
             		RER = calcRER(thermEXP, treesParams, Karray, Narray, rarray, idx); // theoretical optimal RER
 
 // if current ts is first expansion step
-            		if (SingleLeafArea[k] == 0.0) 
+            		if (SingleLeafArea[k] == 0.0)
             		{
                 		SingleLeafArea[k] = N; // cm2
 
@@ -5111,10 +5111,10 @@ void BiogeochemicalCycles::updateLeaf(int k,
             		}
 
 //optimal change in area
-            		deltaAreaL = RER * SingleLeafArea[k] * delta_thermTime; 
+            		deltaAreaL = RER * SingleLeafArea[k] * delta_thermTime;
 
 //add limitations (H20, NSC)
-                
+
                 //if soil properties are well characterized, then denominator below set to porosity
                     //waterStat = thetaRoot/treesParams.porosity;
                     waterStat = thetaRoot/0.35;
@@ -5123,7 +5123,7 @@ void BiogeochemicalCycles::updateLeaf(int k,
             		deltaAreaL *= water_RER_coef;
             		SLA_instant = calcSLA(plantNstatus[0], treesParams.SLA_min*2, treesParams.SLA_min);
 // returns in kgC/ha
-            		C_needed = calcdeltaC(SLA_instant, deltaAreaL)/cm2_to_ha(treesParams.pot_size); 
+            		C_needed = calcdeltaC(SLA_instant, deltaAreaL)/cm2_to_ha(treesParams.pot_size);
             		NSCStatus = leafNSC[0];
             		NSC_RER_coef = calcNSCRER(NSCStatus, C_needed);
             		deltaAreaL *= NSC_RER_coef;
@@ -5133,7 +5133,7 @@ void BiogeochemicalCycles::updateLeaf(int k,
                 		deltaAreaL = SingleLeafAreaPotential[k]  - SingleLeafArea[k];
             		}
 //update area, cm2
-            		SingleLeafArea[k] = SingleLeafArea[k] + deltaAreaL;  
+            		SingleLeafArea[k] = SingleLeafArea[k] + deltaAreaL;
 
 // calculate C and N requirements
             		deltaC = calcdeltaC(SLA_instant, deltaAreaL); // returns in kgC
@@ -5141,9 +5141,9 @@ void BiogeochemicalCycles::updateLeaf(int k,
 // structural N, in kgN, modulated by plant N status
             		deltaN= calcdeltaN(deltaC, treesParams);
                     Rexp = calcRespEXP(deltaC);
-                
+
                     delta_nsc = Rexp/cm2_to_ha(treesParams.pot_size); //kgC/ha
-                
+
 //added - DSM
             		SingleLeafBiomassNitrogen[k] +=  deltaN; // structural N, in kgC
             		//cout << "deltaN at this ts is " << deltaN << endl;
@@ -5151,11 +5151,11 @@ void BiogeochemicalCycles::updateLeaf(int k,
 
 // update costs
             		delta_nsc = Rexp/cm2_to_ha(treesParams.pot_size); //kgC/ha
-            		
+
 // call original function to update carbon pools
-                
+
 			deltaAreaL = cm2_to_m2(deltaAreaL);
-            		
+
                 updateLeafCarbonNitrogenPools(treesParams, deltaAreaL, RL,
 					N_neg_fract, N_neg_demand, N_pos_demand);
         	}
@@ -5168,7 +5168,7 @@ void BiogeochemicalCycles::updateLeaf(int k,
         	N_neg_demand += N_neg_fract *  deltaN/cm2_to_ha(treesParams.pot_size) ;
         	N_pos_demand += (1.0-N_neg_fract) * deltaN/cm2_to_ha(treesParams.pot_size) ;
  */
-    	} 
+    	}
 	else
     	{
         // ----------------
@@ -5191,7 +5191,7 @@ void BiogeochemicalCycles::updateLeaf(int k,
 // compute plant-level average SLA
 // returns SLA in units m2/kg
 
-double BiogeochemicalCycles::calcPlantSLA(int Lf_idx, 
+double BiogeochemicalCycles::calcPlantSLA(int Lf_idx,
 					  trees_params treesParams)
 {
     	double sum_area;
@@ -5201,12 +5201,12 @@ double BiogeochemicalCycles::calcPlantSLA(int Lf_idx,
     	double shoot_init, leaf_init;
 
 // grams shoot mass total
-    	//shoot_init = (1.0/treesParams.SLA_max*10.0)*treesParams.projectedArea_init; 
-    	shoot_init = 1.0/(treesParams.SLA_max*10.0)*treesParams.projectedArea_init; 
+    	//shoot_init = (1.0/treesParams.SLA_max*10.0)*treesParams.projectedArea_init;
+    	shoot_init = 1.0/(treesParams.SLA_max*10.0)*treesParams.projectedArea_init;
 // kg leaf mass total
-    	leaf_init = 0.8*g_to_kg(shoot_init); 
+    	leaf_init = 0.8*g_to_kg(shoot_init);
 //kg leaf biomass C
-    	sum_C = leaf_init/(1.0+treesParams.leafNSCscalar); 
+    	sum_C = leaf_init/(1.0+treesParams.leafNSCscalar);
     	sum_area = treesParams.projectedArea_init; //cm2 leaf
 
 // add biomass C and area of additional leaves
@@ -5226,21 +5226,21 @@ double BiogeochemicalCycles::calcPlantSLA(int Lf_idx,
 // and projected ground area
 // returns LAI in cm2/cm2 = m2/m2
 
-double BiogeochemicalCycles::calcLAI(int Lf_idx, 
+double BiogeochemicalCycles::calcLAI(int Lf_idx,
 				     trees_params treesParams, double* Karray)
 {
     	double sum_ProjArea;
     	double max_ProjArea, len, len_proj, lai;
         double avg_K;
         double sum_K = 0.0;
-    
+
     for (int k = 0; k < 500; k++)
     {
         sum_K += Karray[k];
     }
     avg_K = sum_K/500;
     //cout << avg_K << endl;
-    
+
 // maximum projected ground area (denominator of LAI)
     	max_ProjArea = 4.0*treesParams.leaf_len_to_width * avg_K *
 				pow(sin(treesParams.leaf_insertAngle * PI/180.0), 2.0); //cm2
@@ -5251,7 +5251,7 @@ double BiogeochemicalCycles::calcLAI(int Lf_idx,
 // add projected area of subsequent leaves
     	for (int i = 0; i < Lf_idx; i++)
     	{
-        	len = 2.0*treesParams.leaf_len_to_width * 
+        	len = 2.0*treesParams.leaf_len_to_width *
 				sqrt( SingleLeafArea[i]/(PI * treesParams.leaf_len_to_width));
         	len_proj = len * sin(treesParams.leaf_insertAngle * PI/180.0);
         	sum_ProjArea += PI*len_proj*sqrt(SingleLeafArea[i]/
@@ -5270,7 +5270,7 @@ double BiogeochemicalCycles::calcLAI(int Lf_idx,
 // does unit conversion within function
 // 1 ha = 1x10^8 cm2
 
-double BiogeochemicalCycles::getSumLeafBiomassCarbon(int Lf_idx, 
+double BiogeochemicalCycles::getSumLeafBiomassCarbon(int Lf_idx,
 						     double ProjGrndArea_instant)
 {
     	double leafBiomassCarbon;
@@ -5279,7 +5279,7 @@ double BiogeochemicalCycles::getSumLeafBiomassCarbon(int Lf_idx,
     	for (int i = 0; i < Lf_idx; i++)
     	{
 // check this... i think leaf state var are already in kg??
-        	sum += SingleLeafBiomassCarbon[i]; // grams C 
+        	sum += SingleLeafBiomassCarbon[i]; // grams C
     	}
     	leafBiomassCarbon = sum/ProjGrndArea_instant * 100000.0;
 
@@ -5294,7 +5294,7 @@ double BiogeochemicalCycles::getSumLeafBiomassCarbon(int Lf_idx,
 // does unit conversion within function
 // 1 ha = 1x10^8 cm2
 
-double BiogeochemicalCycles::getSumLeafBiomassNitrogen(int Lf_idx, 
+double BiogeochemicalCycles::getSumLeafBiomassNitrogen(int Lf_idx,
 							double ProjGrndArea_instant)
 {
     	double leafBiomassNitrogen;
@@ -5317,7 +5317,7 @@ double BiogeochemicalCycles::getSumLeafBiomassNitrogen(int Lf_idx,
 // leaf carbon nitrogen pools
 // 1 ha = 1x10^8 cm2
 
-double BiogeochemicalCycles::getTotLeafGrowthRespiration(int Lf_idx, 
+double BiogeochemicalCycles::getTotLeafGrowthRespiration(int Lf_idx,
 							 double ProjGrndArea_instant)
 {
     	double TotLeafGrowthRespiration;
@@ -5407,4 +5407,3 @@ double BiogeochemicalCycles::getSumLeafRubiscoNitrogen(int Lf_idx)
     	}
     	return(sum);
 }
-

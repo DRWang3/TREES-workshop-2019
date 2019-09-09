@@ -16,12 +16,13 @@
 #include <vector>
 #include <fstream>
 #include <math.h>
+#include <random>
+#include <algorithm>
 #include "parameter.h"
 #include "state_store.h"
 #include "data.h"
 #include "constants.h"
 #include "data_store.h"
-#include <random>
 
 #define DEEPSW 0
 #define MIDSW 1
@@ -55,8 +56,8 @@
 #define ITMAX 100
 #define EPS 0.0000003
 #define MAXH 400   //maximum number of steady-state loops
-#define LFUSION 334000.0    // Latent heat of fusion (KJ mm-1 m-2) 
-#define LVAPOUR 2495000.0   // Latent heat of vapourization (KJ mm-1 m-2) 
+#define LFUSION 334000.0    // Latent heat of fusion (KJ mm-1 m-2)
+#define LVAPOUR 2495000.0   // Latent heat of vapourization (KJ mm-1 m-2)
 
 //using namespace std;
 
@@ -304,11 +305,11 @@ class BiogeochemicalCycles
 
 	//method to compute lateral root Weibull parameters based on root area
 		void computeLateralRootWeibulls(trees_params& treesParams);
-		void computeLateralRootWeibulls(int j, 
+		void computeLateralRootWeibulls(int j,
                                                         trees_params treesParams,
                                                         double& bsum,
                                                         double& csum);
-		void updateLateralRootWeibulls(double bsat[][MD], 
+		void updateLateralRootWeibulls(double bsat[][MD],
                                                         double ccsat[][MD],
                                                         trees_params treesParams);
 	//method to query leaf carbon
@@ -549,7 +550,7 @@ class BiogeochemicalCycles
 					   int k);
 
 	//methods to get plant N totals
-		
+
 		double getPlantN();
 
 		double getLeafBiomassN();
@@ -626,10 +627,10 @@ class BiogeochemicalCycles
 							   double& DECh,
 							   double& DECea,
 							   double& DECes,
-							   double& rh, 
+							   double& rh,
                                                    	   double& rr,
                                                    	   double& kd,
-                                                   	   double& kn, 
+                                                   	   double& kn,
                                                    	   double& fns,
 							   int root_num,
 							   int root_order,
@@ -830,34 +831,34 @@ class BiogeochemicalCycles
 				double N_neg_fract,
 				double& N_neg_demand,
 				double& N_pos_demand, double* Karray, double* Narray, double* rarray, int idx, double thetaRoot);
-    		double calcdeltaC(double SLA, 
+    		double calcdeltaC(double SLA,
 				  double deltaAreaL);
-    		double calcdeltaN(double deltaC, 
+    		double calcdeltaN(double deltaC,
 				  trees_params treesParams);
     //methods to compute biophysical constraints on relative growth rates (PLACEHOLDERS)
     		double calcHydRAR(double hydraulicStatus);
     		double calcNRAR(double NStatus);
     		double calcHydRER(double waterStat);
-    		double calcNSCRER(double NSCStatus, 
+    		double calcNSCRER(double NSCStatus,
 				  double deltaC);
     //methods to compute SLA from N status
-    		double calcSLA(double plantNitrogenStatus, 
-			       double SLA_max, 
+    		double calcSLA(double plantNitrogenStatus,
+			       double SLA_max,
 			       double SLA_min);
     //methods for computing growth respiration associated with division and expansion
-    		double calcRespCD(double deltaAPot, 
+    		double calcRespCD(double deltaAPot,
 				  double pseudoC_coef);
     		double calcRespEXP(double deltaC);
     //method for computing plant-level SLA (sum(single leaf areas)/sum(single leaf carbon))
-    		double calcPlantSLA(int Lf_idx, 
+    		double calcPlantSLA(int Lf_idx,
 				    trees_params treesParams);
     //methods to calculate plant LAI
-    		double calcLAI(int Lf_idx, 
+    		double calcLAI(int Lf_idx,
 			       trees_params treesParams, double* Karray);
     //methods for computing plant-level state variables from leaf-level state variables
-    		double getSumLeafBiomassCarbon(int Lf_idx, 
+    		double getSumLeafBiomassCarbon(int Lf_idx,
 					       double ProjGrndArea_instant);
-    		double getSumLeafBiomassNitrogen(int Lf_idx, 
+    		double getSumLeafBiomassNitrogen(int Lf_idx,
 						 double ProjGrndArea_instant);
     		double getSumLeafNSC(int Lf_idx);
     		double getSumLeafchloroplastStarch(int Lf_idx);
@@ -865,14 +866,14 @@ class BiogeochemicalCycles
     		double getSumLeafStoredNitrogen(int Lf_idx);
     		double getSumLeafRubiscoNitrogen(int Lf_idx);
     //method to compute total leaf growth respiration
-    		double getTotLeafGrowthRespiration(int Lf_idx, 
+    		double getTotLeafGrowthRespiration(int Lf_idx,
 						   double ProjGrndArea_instant);
     //method to get upper and lower limits for truncated gamma distributions
             //double* getQuantileVals(double alpha, double beta, double min_quant, double max_quant);
             vector<double> getQuantileVals(double alpha, double beta, double min_quant, double max_quant);
     //method to sample from truncated gamma distribution
             double sampleTruncatedGamma(double alpha, double beta, double maxlim, double minlim);
-    
+
 	private:
     	//leaf-level state variables that directly link to plant level leaf state variables
     		double* SingleLeafBiomassCarbon;
@@ -903,7 +904,7 @@ public:
                 double rhizK[209];
                 double rhizFlux[209];
         };
-        
+
 
 public:
 
@@ -919,48 +920,48 @@ public:
 		int hydraulicModel_flag,
 		int ts,
 		trees_params& treesParams,
-		outputStruct &ecrit_k_psi, outputStruct &k_p_e, double ecritOut[], 
+		outputStruct &ecrit_k_psi, outputStruct &k_p_e, double ecritOut[],
 		double pc[], double klpred[],
-                double ppredOut[], double epredOut[], double nodeFail[], 
+                double ppredOut[], double epredOut[], double nodeFail[],
 		char nodeTyp[], double ***psi,
                 double **rflux, double soilpsiavg[], double nts[], double evap[], double kroot[],
                 double axr[], double latr[], double kshoot[], double dslat[], double dsax[], double drlat[],
                 double drax[], double l[], double ksat[][MD], double bsat[][MD], double ccsat[][MD],
                 double newb[][MD], double newc[][MD], double ip[][ULAT], double b[][ULAT], double b1[][ULAT],
                 double n[][ULAT], double n1[][ULAT], double r[][ULAT], double vu[][ULAT], double vl[][ULAT],
-                double cf[][ULAT], double pe[][ULAT], double ws_[][ULAT], 
+                double cf[][ULAT], double pe[][ULAT], double ws_[][ULAT],
 		double ks[][ULAT], double p[][ULAT],
-                double dpp[][ULAT], double jl[][ULAT], double wnu[][ULAT], 
+                double dpp[][ULAT], double jl[][ULAT], double wnu[][ULAT],
 		double wu[][ULAT], double wnl[][ULAT],
-                double wl[][ULAT], double cpu[][ULAT], double cpl[][ULAT], 
+                double wl[][ULAT], double cpu[][ULAT], double cpl[][ULAT],
 		double cpp[][ULAT], double ku[][ULAT],
-                double kl[][ULAT], double f[][ULAT], double cc[][2], 
+                double kl[][ULAT], double f[][ULAT], double cc[][2],
 		double psinode[][NMAX], double psimin[][NMAX],
-                double jmatrix[][NMAX], double jmatrix2[][NMAX], 
+                double jmatrix[][NMAX], double jmatrix2[][NMAX],
 		double percent[], double rssoil[], double rs[],
-                double dp[], double ff[], int col[], int row[], 
+                double dp[], double ff[], int col[], int row[],
 		int indxx[], double subtract[], double pressure[],
-                double plc[], double plcweib[], double rsquare[], 
+                double plc[], double plcweib[], double rsquare[],
 		double soilpsi[], double al[], double ar[],
-                double saturatedKs[][4], double &ptarg, double &e, 
+                double saturatedKs[][4], double &ptarg, double &e,
 		double &rr, double &rzw, double &rd, double &einc,
-                int &SoilRhizElements, double &dt, double &gmd, 
+                int &SoilRhizElements, double &dt, double &gmd,
 		double &gsd, double &bkd, double &fs, double &fc,
-                double &Fabs, double &cpplant, double &saxlat, 
+                double &Fabs, double &cpplant, double &saxlat,
 		double &raxlat, double &rfract, double &kla,
-                double &aral, double &latot, double &ratot, int &shootElements, 
+                double &aral, double &latot, double &ratot, int &shootElements,
 		int &ktotal, double &soilpsimin,
-                int &ShootModules, int &rootElements, int &RootModules, 
+                int &ShootModules, int &rootElements, int &RootModules,
 		int &totmodules, double &axShoot_b,
-                double &axShoot_c, double &latShoot_b, double &latShoot_c, 
+                double &axShoot_c, double &latShoot_b, double &latShoot_c,
 		double &axRoot_b, double &axRoot_c,
                 double &latRoot_b, double &latRoot_c, double &plco, double &pdecrement, double &sumy1,
                 double &sumy2, double &sumprod, double &cincrement, double &soilvol, double &rlateral,
                 double &rLat_base, double &slateral, double &sLat_base, double &raxial, double &pleafave,
                 int &tnode, double fac, double &modelledKL);
 
-public:  
-      
+public:
+
         double getData(ifstream &in);
 
         void ksolve( double r[][ULAT], double pe[][ULAT], double b[][ULAT], double b1[][ULAT],
@@ -985,8 +986,8 @@ public:
                     double gsd, double fc, double fs, double bkd,
                     int &tnode, double e, double dt, double fac, const int SoilRhizElements,
                     double cc[][2], double kl[][ULAT], double ku[][ULAT], double **rflux,
-		    double &modelledKL, double &soilvol, double initial_conductivity_root, 
-		    double decrement_root, double initial_conducitivty_shoot, 
+		    double &modelledKL, double &soilvol, double initial_conductivity_root,
+		    double decrement_root, double initial_conducitivty_shoot,
 		    double decrement_shoot, int &HydraulicModelFailCond );
 
         //ifstream paramFile;
@@ -994,7 +995,7 @@ public:
         void preSetup(double md_raw[], double Md, double e_raw[], double ev,  double la_raw[], double Al,
                       double arAl[], double Ar_Al,  double **l_raw, double Ypd[]);
 
-   
+
 public:
 
    	void setup( bool reset,
@@ -1002,33 +1003,33 @@ public:
                     outputStruct &k_p_e,
                     double ecritOut[],
                     double pc[],
-                    double klpred[],  
-                    double ppredOut[], 
-                    double epredOut[], 
-                    double nodeFail[], 
-                    char nodeTyp[],   
+                    double klpred[],
+                    double ppredOut[],
+                    double epredOut[],
+                    double nodeFail[],
+                    char nodeTyp[],
                     double ***psi,
-                    double **rflux,    
+                    double **rflux,
                     double soilpsiavg[],
                     double nts[],
                     double evap[],
-                    double kroot[],  
+                    double kroot[],
                     double axr[],
                     double latr[],
-                    double kshoot[],  
-                    double dslat[], 
+                    double kshoot[],
+                    double dslat[],
                     double dsax[],
                     double drlat[],
                     double drax[],
-                    double l[], 
+                    double l[],
                     double ksat[][MD],
-                    double bsat[][MD], 
+                    double bsat[][MD],
                     double ccsat[][MD],
-                    double newb[][MD], 
+                    double newb[][MD],
                     double newc[][MD],
                     double ip[][ULAT],
-                    double b[][ULAT],  
-                    double b1[][ULAT],  
+                    double b[][ULAT],
+                    double b1[][ULAT],
                     double n[][ULAT],
                     double n1[][ULAT],
                     double r[][ULAT],
@@ -1042,42 +1043,42 @@ public:
                     double dpp[][ULAT],
                     double jl[][ULAT],
                     double wnu[][ULAT],
-                    double wu[][ULAT], 
+                    double wu[][ULAT],
                     double wnl[][ULAT],
                     double wl[][ULAT],
                     double cpu[][ULAT],
                     double cpl[][ULAT],
-                    double cpp[][ULAT], 
+                    double cpp[][ULAT],
                     double ku[][ULAT],
                     double kl[][ULAT],
                     double f[][ULAT],
-                    double cc[][2],   
+                    double cc[][2],
                     double psinode[][NMAX],
                     double psimin[][NMAX],
                     double jmatrix[][NMAX],
 	      	    double jmatrix2[][NMAX],
-                    double percent[], 
-                    double rssoil[], 
+                    double percent[],
+                    double rssoil[],
                     double rs[],
                     double dp[],
                     double ff[],
                     int col[],
                     int row[],
                     int indxx[],
-                    double subtract[], 
-                    double pressure[], 
+                    double subtract[],
+                    double pressure[],
                     double plc[],
-                    double plcweib[], 
-                    double rsquare[], 
+                    double plcweib[],
+                    double rsquare[],
                     double soilpsi[],
-                    double al[],      
+                    double al[],
                     double ar[],
                     double saturatedKs[][4],
                     double &ptarg,
            	    double &e,
                     double &rr,
                     double &rzw,
-                    double &rd, 
+                    double &rd,
                     double &einc,
                     int &SoilRhizElements,
                     double &dt,
@@ -1085,14 +1086,14 @@ public:
                     double &gsd,
                     double &bkd,
                     double &fs,
-                    double &fc,  
+                    double &fc,
                     double &Fabs,
-                    double &cpplant,  
-                    double &saxlat,  
-                    double &raxlat,   
+                    double &cpplant,
+                    double &saxlat,
+                    double &raxlat,
                     double &rfract,
                     double &kla,
-                    double &aral, 
+                    double &aral,
             	    double &latot,
                     double &ratot,
                     int &shootElements,
@@ -1106,7 +1107,7 @@ public:
                     double &axShoot_c,
                     double &latShoot_b,
                     double &latShoot_c,
-                    double &axRoot_b, 
+                    double &axRoot_b,
                     double &axRoot_c,
                     double &latRoot_b,
                     double &latRoot_c,
@@ -1114,17 +1115,17 @@ public:
                     double &pdecrement,
                     double &sumy1,
                     double &sumy2,
-                    double &sumprod,   
+                    double &sumprod,
                     double &cincrement,
-                    double &soilvol,   
+                    double &soilvol,
                     double &rlateral,
                     double &rLat_base,
                     double &slateral,
                     double &sLat_base,
-                    double &raxial,   
-                    double &pleafave, 
+                    double &raxial,
+                    double &pleafave,
                     int &tnode,
-                    double fac,  
+                    double fac,
                     double &modelledKL,
 		    int &HydraulicModelFailCond,
 		    trees_params treesParams);
@@ -1369,52 +1370,52 @@ struct sim_out simulation_functions(
                  		vector<int> InnerStep,
 				BiogeochemicalCycles& bgc,
 				HydraulicModel *hydraulicModel,
-				HydraulicModel::outputStruct &ecrit_k_psi, 
-				HydraulicModel::outputStruct &k_p_e, double ecritOut[], 
+				HydraulicModel::outputStruct &ecrit_k_psi,
+				HydraulicModel::outputStruct &k_p_e, double ecritOut[],
 				double pc[], double klpred[],
-                    		double ppredOut[], double epredOut[], double nodeFail[], 
+                    		double ppredOut[], double epredOut[], double nodeFail[],
 				char nodeTyp[], double ***psi,
-                    		double **rflux, double soilpsiavg[], double nts[], 
+                    		double **rflux, double soilpsiavg[], double nts[],
 				double evap[], double kroot[],
-                    		double axr[], double latr[], double kshoot[], 
+                    		double axr[], double latr[], double kshoot[],
 				double dslat[], double dsax[], double drlat[],
-                    		double drax[], double l[], double ksat[][MD], 
+                    		double drax[], double l[], double ksat[][MD],
 				double bsat[][MD], double ccsat[][MD],
-                    		double newb[][MD], double newc[][MD], double ip[][ULAT], 
+                    		double newb[][MD], double newc[][MD], double ip[][ULAT],
 				double b[][ULAT], double b1[][ULAT],
-                    		double n[][ULAT], double n1[][ULAT], double r[][ULAT], 
+                    		double n[][ULAT], double n1[][ULAT], double r[][ULAT],
 				double vu[][ULAT], double vl[][ULAT],
-                    		double cf[][ULAT], double pe[][ULAT], double ws_[][ULAT], 
+                    		double cf[][ULAT], double pe[][ULAT], double ws_[][ULAT],
 				double ks[][ULAT], double p[][ULAT],
-                    		double dpp[][ULAT], double jl[][ULAT], double wnu[][ULAT], 
+                    		double dpp[][ULAT], double jl[][ULAT], double wnu[][ULAT],
 				double wu[][ULAT], double wnl[][ULAT],
-                    		double wl[][ULAT], double cpu[][ULAT], double cpl[][ULAT], 
+                    		double wl[][ULAT], double cpu[][ULAT], double cpl[][ULAT],
 				double cpp[][ULAT], double ku[][ULAT],
-                    		double kl[][ULAT], double f[][ULAT], double cc[][2], 
+                    		double kl[][ULAT], double f[][ULAT], double cc[][2],
 				double psinode[][NMAX], double psimin[][NMAX],
-                    		double jmatrix[][NMAX], double jmatrix2[][NMAX], 
+                    		double jmatrix[][NMAX], double jmatrix2[][NMAX],
 				double percent[], double rssoil[], double rs[],
-                    		double dp[], double ff[], int col[], int row[], 
+                    		double dp[], double ff[], int col[], int row[],
 				int indxx[], double subtract[], double pressure[],
-                    		double plc[], double plcweib[], double rsquare[], 
+                    		double plc[], double plcweib[], double rsquare[],
 				double soilpsi[], double al[], double ar[],
-                    		double saturatedKs[][4], double &ptarg, double &e, 
+                    		double saturatedKs[][4], double &ptarg, double &e,
 				double &rr, double &rzw, double &rd, double &einc,
-                    		int &SoilRhizElements, double &dt, double &gmd, 
+                    		int &SoilRhizElements, double &dt, double &gmd,
 				double &gsd, double &bkd, double &fs, double &fc,
-                    		double &Fabs, double &cpplant, double &saxlat, 
+                    		double &Fabs, double &cpplant, double &saxlat,
 				double &raxlat, double &rfract, double &kla,
-                    		double &aral, double &latot, double &ratot, 
+                    		double &aral, double &latot, double &ratot,
 				int &shootElements, int &ktotal, double &soilpsimin,
-                    		int &ShootModules, int &rootElements, int &RootModules, 
+                    		int &ShootModules, int &rootElements, int &RootModules,
 				int &totmodules, double &axShoot_b,
-                    		double &axShoot_c, double &latShoot_b, double &latShoot_c, 
+                    		double &axShoot_c, double &latShoot_b, double &latShoot_c,
 				double &axRoot_b, double &axRoot_c,
-                    		double &latRoot_b, double &latRoot_c, double &plco, 
+                    		double &latRoot_b, double &latRoot_c, double &plco,
 				double &pdecrement, double &sumy1,
-                    		double &sumy2, double &sumprod, double &cincrement, 
+                    		double &sumy2, double &sumprod, double &cincrement,
 				double &soilvol, double &rlateral,
-                    		double &rLat_base, double &slateral, double &sLat_base, 
+                    		double &rLat_base, double &slateral, double &sLat_base,
 				double &raxial, double &pleafave,
                     		int &tnode, double fac, double &modelledKL, int &HydraulicModelFailCond);
 
@@ -1496,7 +1497,7 @@ double diffuse_flux(const Time& t,      //current time
 //Qod - diffuse above canopy on horizontal surface, returned by ref
 void rad_partition(const Time& t,      //current time
                    double Qt,          //Qt, measured radiation flux W m-2 (ground)
-                   double zenith,       //zenith angle (radians)        
+                   double zenith,       //zenith angle (radians)
                    double& Qob,		//ref args
                    double& Qod);
 
@@ -1633,7 +1634,7 @@ double calc_gHa(double uz, 	//wind speed @ ref height, m/s
 double calc_psim(double zeta);
 double calc_psih(double zeta);
 
-//returns stability by successive subst 
+//returns stability by successive subst
 //refer 7.21, 7.24, 7.26 & 7.27, C&N
 //conditions for termination hardcoded in terms of change in u_star value
 //in successive substituted value
@@ -1872,7 +1873,7 @@ double unsat_zone_drainage(double dZ1,
                            double porosity,
                            double mineral_fraction);
 
-// Allow unsaturated drainage as long as the soil moisture content is above field capacity 
+// Allow unsaturated drainage as long as the soil moisture content is above field capacity
 double unsat_zone_drainage(double Zw,
                            double pore_size_index,
                            double ko,
@@ -1885,7 +1886,7 @@ double unsat_zone_drainage(double Zw,
 
 
 void DoHydraulicModel(bool silent,
-		HydraulicModel *hydraulicModel, 
+		HydraulicModel *hydraulicModel,
 		int ts,
 		bool callRewet,
 		double Ysoil[],
@@ -1897,7 +1898,7 @@ void DoHydraulicModel(bool silent,
                 double &PsiCrit,
                 int hydraulicModel_flag,
                 trees_params& treesParams,
-		HydraulicModel::outputStruct &ecrit_k_psi, HydraulicModel::outputStruct &k_p_e, 
+		HydraulicModel::outputStruct &ecrit_k_psi, HydraulicModel::outputStruct &k_p_e,
 		double ecritOut[], double pc[], double klpred[],
                 double ppredOut[], double epredOut[], double nodeFail[], char nodeTyp[], double ***psi,
                 double **rflux, double soilpsiavg[], double nts[], double evap[], double kroot[],
@@ -1905,28 +1906,28 @@ void DoHydraulicModel(bool silent,
                 double drax[], double l[], double ksat[][MD], double bsat[][MD], double ccsat[][MD],
                 double newb[][MD], double newc[][MD], double ip[][ULAT], double b[][ULAT], double b1[][ULAT],
                 double n[][ULAT], double n1[][ULAT], double r[][ULAT], double vu[][ULAT], double vl[][ULAT],
-                double cf[][ULAT], double pe[][ULAT], double ws_[][ULAT], 
+                double cf[][ULAT], double pe[][ULAT], double ws_[][ULAT],
 		double ks[][ULAT], double p[][ULAT],
-                double dpp[][ULAT], double jl[][ULAT], double wnu[][ULAT], 
+                double dpp[][ULAT], double jl[][ULAT], double wnu[][ULAT],
 		double wu[][ULAT], double wnl[][ULAT],
-                double wl[][ULAT], double cpu[][ULAT], double cpl[][ULAT], 
+                double wl[][ULAT], double cpu[][ULAT], double cpl[][ULAT],
 		double cpp[][ULAT], double ku[][ULAT],
-                double kl[][ULAT], double f[][ULAT], double cc[][2], 
+                double kl[][ULAT], double f[][ULAT], double cc[][2],
 		double psinode[][NMAX], double psimin[][NMAX],
-                double jmatrix[][NMAX], double jmatrix2[][NMAX], double percent[], 
+                double jmatrix[][NMAX], double jmatrix2[][NMAX], double percent[],
 		double rssoil[], double rs[],
-                double dp[], double ff[], int col[], int row[], int indxx[], 
+                double dp[], double ff[], int col[], int row[], int indxx[],
 		double subtract[], double pressure[],
                 double plc[], double plcweib[], double rsquare[], double soilpsi[], double al[], double ar[],
-                double saturatedKs[][4], double &ptarg, double &e, 
+                double saturatedKs[][4], double &ptarg, double &e,
 		double &rr, double &rzw, double &rd, double &einc,
-                int &SoilRhizElements, double &dt, double &gmd, double &gsd, 
+                int &SoilRhizElements, double &dt, double &gmd, double &gsd,
 		double &bkd, double &fs, double &fc,
                 double &Fabs, double &cpplant, double &saxlat, double &raxlat, double &rfract, double &kla,
-                double &aral, double &latot, double &ratot, int &shootElements, 
+                double &aral, double &latot, double &ratot, int &shootElements,
 		int &ktotal, double &soilpsimin,
                 int &ShootModules, int &rootElements, int &RootModules, int &totmodules, double &axShoot_b,
-                double &axShoot_c, double &latShoot_b, double &latShoot_c, 
+                double &axShoot_c, double &latShoot_b, double &latShoot_c,
 		double &axRoot_b, double &axRoot_c,
                 double &latRoot_b, double &latRoot_c, double &plco, double &pdecrement, double &sumy1,
                 double &sumy2, double &sumprod, double &cincrement, double &soilvol, double &rlateral,
@@ -1991,12 +1992,12 @@ struct farqout
 	 double Rd;
         };
 
-double photosynthesis(double Rd_mult, 
-			double Jmax_mult, 
-			double thetaJ, 
-			double psiJ, 
+double photosynthesis(double Rd_mult,
+			double Jmax_mult,
+			double thetaJ,
+			double psiJ,
 			struct farqin in,
-			struct farqout& out, 
+			struct farqout& out,
 			int verbose);
 
 
