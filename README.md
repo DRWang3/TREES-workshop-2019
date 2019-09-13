@@ -7,6 +7,10 @@ This repository contains documents used for a workshop held at the University of
 
 *   **TREES_tutorial_2019.docx** describes the tutorial exercises. 
 
+*   **TREES_references.docx** is a list of references relevant to the model (e.g., sources of governing equations).
+
+*   **TREESconcepts** is a slidedeck containing an overview of the processes modeled in TREES.
+
 *   **TREES_workshop_exercises** contains all associated code for the two main exercises carried out in the workshop: (1) a comparison of simulation output and empirical observation using *Brassica rapa* Chinese Cabbage, and (2) a sensitivity analysis with varying roots in an example using pinon pine. 
 
 *   **TREES3_model** contains the TREES3 model. 
