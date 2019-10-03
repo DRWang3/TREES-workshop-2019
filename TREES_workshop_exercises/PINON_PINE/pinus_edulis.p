@@ -52,14 +52,14 @@
 50.0 %total_R_in_root_system
 0.405 0.353 saturated_kl_for_whole_plant
 -0.93 -1.06 0.05  pd_at_sat_kl
-14.1 3.43 ax_Shoot-b_value_(weibull)
-3.55 1.65 ax_Shoot-c_value_(weibull)
-14.1 3.43 lat_Shoot-b_value_(weibull)
-3.55 1.65 lat_Shoot-c_value_(weibull)
-10.1 3.57 ax_Root-b_value_(weibull)
-6.96 4.07 ax_Root-c_value_(weibull)
-10.1 3.57 lat_Root-b_value_(weibull)
-6.96 4.07 lat_Root-c_value_(weibull)
+3.43 14.1 3.43 ax_Shoot-b_value_(weibull)
+1.65 3.55 1.65 ax_Shoot-c_value_(weibull)
+3.43 14.1 3.43 lat_Shoot-b_value_(weibull)
+1.65 1.65 lat_Shoot-c_value_(weibull)
+3.57 10.1 3.57 ax_Root-b_value_(weibull)
+4.07 4.07 ax_Root-c_value_(weibull)
+3.57 10.1 3.57 lat_Root-b_value_(weibull)
+4.07 6.96 4.07 lat_Root-c_value_(weibull)
 40.0 initial_conductivity(root)
 0.001 decrement(root)- default 0.001
 80.0 initial_conductivity(shoot)
@@ -132,6 +132,13 @@
 289.0 40.0 pot_size //max projected area, cm2
 0.5     root_to_shoot
 1.59    leaf_to_stem
+0 useLeafGamma;
+883.31 Kalpha;
+22.87 Kbeta;
+8.11 Nalpha;
+11.89 Nbeta;
+118.31 ralpha;
+131431.51 rbeta;
 3.41739e-05 0.0000001 0.0001 sd_err_Ec
 5.47241 0.001 12.0 sd_err_NEE
 0.5 0.0 1.0 sd_err_Ec_weight

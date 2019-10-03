@@ -132,6 +132,13 @@
 289.0 40.0 pot_size //max projected area, cm2
 0.5     root_to_shoot
 1.59    leaf_to_stem
+0 useLeafGamma;
+883.31 Kalpha;
+22.87 Kbeta;
+8.11 Nalpha;
+11.89 Nbeta;
+118.31 ralpha;
+131431.51 rbeta;
 3.41739e-05 0.0000001 0.0001 sd_err_Ec
 5.47241 0.001 12.0 sd_err_NEE
 0.5 0.0 1.0 sd_err_Ec_weight
